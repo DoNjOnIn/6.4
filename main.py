@@ -1,5 +1,18 @@
 import random
 
+def create(b,low,high,i,n):
+    if i<n:
+        b.append(random.randint(low, high))
+        create(b,low,high,i+1,n)
+
+def found0(b,m):
+        if b[m]==0:
+            return mult(b,m+1,1)
+        elif m==len(b)-1:
+            return 'Немає нулів'
+        if m < len(b):
+            return found0(b,m+1)
+
 def max(imax,nmax,a,i):
     if i>len(a)-1:
         return imax
@@ -29,20 +42,14 @@ def shift(b,i,k):
 
 def main():
     b=[]
-    n=(int(input('n=')))
-    m=0
-    for i in range(n):
-        b.append(random.randint(-5, 5))
+    n = (int(input('n=')))
+    low = (int(input('low=')))
+    high = (int(input('high=')))
+    create(b,low,high,0,n)
     print(b)
     print('N='+str(max(0, b[0], b, 0)+1))
-    while m <len(b):
-        if b[m]==0:
-            print(mult(b,m+1,1))
-            break
-        if m==len(b)-1:
-            print('Немає нулів')
-        m+=1
-    shift(b,1,1)
+    print('Добуток='+str(found0(b,0)))
+    shift(b, 1, 1)
     print(b)
 
 if __name__=='__main__':
